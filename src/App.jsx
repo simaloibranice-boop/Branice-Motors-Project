@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Parts from './pages/Parts';
 import About from './pages/About'; 
 import Dealers from './pages/Dealers';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -16,10 +17,18 @@ function App() {
       <div className="flex-grow">
     <Routes>
     <Route path='/' element={<Home />} />
-    <Route path='/parts' element={<Parts />} />
+    <Route path='/parts' element={
+      <ProtectedRoute>
+        <Parts />
+      </ProtectedRoute>
+    } />
     <Route path='/about' element={<About />} />
     <Route path='/login' element={<Login />} />
-    <Route path='/dealers' element={<Dealers />} />
+    <Route path='/dealers' element={
+      <ProtectedRoute>
+        <Dealers />
+      </ProtectedRoute>
+    } />
     </Routes>
     </div>
     <Footer />

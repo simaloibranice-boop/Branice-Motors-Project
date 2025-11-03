@@ -1,18 +1,39 @@
 import React, { useState } from "react";
+import { auth } from '../firebaseConfig';
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [register, setRegister] = useState(false);
     const[form, setForm] = useState({name: '', email: '', password:'', confirm: '', id: ''});
+    const navigate = useNavigate();
 
    const handleChange = e => setForm({...form, [e.target.name]: e.target.value});
-   const submit = e => {
+   const submit = async e => {
     e.preventDefault();
     if (register) {
         if (form.password !== form.confirm) return alert('Passwords do not match');
         if (form.id.length > 9) return alert('ID max 9 digits');
-        return alert(`Registered: ${form.name}`);  
+        
+        try {
+            await createUserWithEmailAndPassword(auth, form.email, form.password);
+            alert(`Registration: ${form.name}`);
+            navigate("/dealers");
+        } catch (error) {
+            alert(error.message);
+        }
+        return;
     }
-    alert(`Logged in: ${form.email}`);
+
+    // login flow
+    try {
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+        alert(`Login: ${form.email}`);
+        navigate("/dealers");
+    } catch (error) {
+        alert(error.message);
+    }
+   
    };
    return (
     <div className="bg-blue-500 text-green-300 min-h0screen flex flex-col">

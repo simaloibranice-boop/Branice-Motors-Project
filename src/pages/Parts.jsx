@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import partsData from "../data/parts";
-import {db} from "../firebaseConfig";
+import { db } from "../firebaseConfig";
+import { auth } from '../firebaseConfig';
 import {collection, addDoc} from "firebase/firestore";
 import UploadParts from "../UploadParts";
 

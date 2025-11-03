@@ -36,7 +36,7 @@ function Login() {
    
    };
    return (
-    <div className="bg-blue-500 text-green-300 min-h0screen flex flex-col">
+    <div className="bg-blue-500 text-green-300 min-h-screen flex flex-col">
         <h2 className="text-4xl font-bold mb-4">{register ? "Register" : "Login"}</h2>
         <form onSubmit={submit} className="space-y-2">
             {register && <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} className="border p-2 w-full "required />}
